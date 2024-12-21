@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="amount">so tien:</label>
+        <input type="number" id="amount" placeholder="nhap so tien can chuyen doi">
+        <select name="fromCurrency" id="fromCurrency">
+            <option value="USDtoVND">USD->VND</option>
+            <option value="VNDtoUSD">VND->USD</option>
+        </select>
+        <button type="button" onclick="convert()">convert</button>
+        <br><br><div id="result"></div>
+    </form>
+    <script>
+        function convert() {
+            let amount = document.getElementById("amount").value;
+            let fromCurrency = document.getElementById("fromCurrency").value;
+            let result;
+
+            // Kiểm tra nếu giá trị nhập vào hợp lệ
+            if (amount === "" || isNaN(amount)) {
+                document.getElementById("result").innerHTML = "Vui lòng nhập số tiền hợp lệ!";
+                return;
+            }
+
+            const exchangeRate = 25300;
+
+            if (fromCurrency === "USDtoVND") {
+                result = exchangeRate * amount;
+                document.getElementById("result").innerHTML = `${amount} USD = ${result} VND`;
+            } else {
+                result = amount / exchangeRate;
+                document.getElementById("result").innerHTML = `${amount} VND = ${result} USD`;
+            }
+        }
+    </script>
+</body>
+</html>
